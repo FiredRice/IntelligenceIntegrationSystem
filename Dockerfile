@@ -1,15 +1,33 @@
 # ---------- 1. 基础镜像：官方 Python 3.10 slim ----------
 FROM python:3.10-slim
 
-
 # ---------- 2. 系统依赖： playwright 需要 chromium 及其运行时库 ----------
-# 设置清华源
-RUN sed -i \
-    's|http://deb.debian.org|https://mirrors.tuna.tsinghua.edu.cn|g; \
-     s|http://security.debian.org|https://mirrors.tuna.tsinghua.edu.cn|g' \
-    /etc/apt/sources.list
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
+# RUN apt-get update && apt-get install -y --no-install-recommends \
+#         wget \
+#         gnupg \
+#         ca-certificates \
+#         fonts-liberation \
+#         libappindicator3-1 \
+#         libasound2 \
+#         libatk-bridge2.0-0 \
+#         libatk1.0-0 \
+#         libcups2 \
+#         libdbus-1-3 \
+#         libdrm2 \
+#         libgbm1 \
+#         libgtk-3-0 \
+#         libnspr4 \
+#         libnss3 \
+#         libx11-xcb1 \
+#         libxcomposite1 \
+#         libxdamage1 \
+#         libxrandr2 \
+#         xdg-utils \
+#         # 清理缓存减小镜像体积
+#     && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive \
+    apt-get install -y --no-install-recommends -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \
         wget \
         gnupg \
         ca-certificates \
@@ -30,7 +48,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libxdamage1 \
         libxrandr2 \
         xdg-utils \
-        # 清理缓存减小镜像体积
     && rm -rf /var/lib/apt/lists/*
 
 # ---------- 3. 创建工作目录 ----------
