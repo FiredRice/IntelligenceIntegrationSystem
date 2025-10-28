@@ -2,35 +2,7 @@
 FROM python:3.10-slim
 
 # ---------- 2. 系统依赖： playwright 需要 chromium 及其运行时库 ----------
-# RUN apt-get update && apt-get install -y --no-install-recommends \
-#         wget \
-#         gnupg \
-#         ca-certificates \
-#         fonts-liberation \
-#         libappindicator3-1 \
-#         libasound2 \
-#         libatk-bridge2.0-0 \
-#         libatk1.0-0 \
-#         libcups2 \
-#         libdbus-1-3 \
-#         libdrm2 \
-#         libgbm1 \
-#         libgtk-3-0 \
-#         libnspr4 \
-#         libnss3 \
-#         libx11-xcb1 \
-#         libxcomposite1 \
-#         libxdamage1 \
-#         libxrandr2 \
-#         xdg-utils \
-#         # 清理缓存减小镜像体积
-#     && rm -rf /var/lib/apt/lists/*
-
-RUN echo "deb http://mirrors.aliyun.com/debian/ bullseye main non-free contrib" > /etc/apt/sources.list && \
-    echo "deb http://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib" >> /etc/apt/sources.list && \
-    echo "deb http://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib" >> /etc/apt/sources.list && \
-    echo "deb http://mirrors.aliyun.com/debian-security bullseye-security main" >> /etc/apt/sources.list && \
-    apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
         wget \
         gnupg \
         ca-certificates \
@@ -51,6 +23,7 @@ RUN echo "deb http://mirrors.aliyun.com/debian/ bullseye main non-free contrib" 
         libxdamage1 \
         libxrandr2 \
         xdg-utils \
+        # 清理缓存减小镜像体积
     && rm -rf /var/lib/apt/lists/*
 
 # ---------- 3. 创建工作目录 ----------
