@@ -4,7 +4,10 @@ FROM python:3.10-slim
 
 # ---------- 2. 系统依赖： playwright 需要 chromium 及其运行时库 ----------
 # 设置清华源
-RUN sed -i 's@deb.debian.org@mirrors.tuna.tsinghua.edu.cn@g'
+RUN sed -i \
+    's|http://deb.debian.org|https://mirrors.tuna.tsinghua.edu.cn|g; \
+     s|http://security.debian.org|https://mirrors.tuna.tsinghua.edu.cn|g' \
+    /etc/apt/sources.list
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         wget \
