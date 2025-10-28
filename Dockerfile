@@ -1,5 +1,5 @@
-# ---------- 1. 基础镜像：官方 Python 3.10 slim ----------
-FROM python:3.10-slim
+# ---------- 1. 能同时运行 playwright 和 python3.10 的镜像 ----------
+FROM mcr.microsoft.com/playwright/python:v1.52.0-jammy
 
 # ---------- 2. 系统依赖： playwright 需要 chromium 及其运行时库 ----------
 RUN apt-get update && apt-get install -y --no-install-recommends \
