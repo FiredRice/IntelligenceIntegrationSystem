@@ -25,9 +25,9 @@ FROM python:3.10-slim
 #         xdg-utils \
 #         # 清理缓存减小镜像体积
 #     && rm -rf /var/lib/apt/lists/*
-RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive \
-    apt-get install -y --no-install-recommends -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \
+RUN sed -i 's/deb.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list && \
+    sed -i 's/security.debian.org/mirrors.tuna.tsinghua.edu.cn/g' /etc/apt/sources.list && \
+    apt-get update && apt-get install -y --no-install-recommends \
         wget \
         gnupg \
         ca-certificates \
