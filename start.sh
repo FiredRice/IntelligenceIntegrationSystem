@@ -6,7 +6,7 @@ docker rm ItIntegrationSystem
 docker rmi ItIntegrationSystem:latest
 
 # 构建镜像
-docker build --build-arg HTTP_PROXY=http://127.0.0.1:7890 --tag it-integration-system .
+docker build --tag it-integration-system .
 
 # 守护进程运行容器
 docker run \
